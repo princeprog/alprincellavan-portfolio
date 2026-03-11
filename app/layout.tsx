@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Unbounded } from "next/font/google";
 import "./globals.css";
+import CardNav from "@/components/layout/CardNav";
+import Threads from "@/components/ui/Threads";
+import { SiGithub, SiGmail, SiLinkerd } from 'react-icons/si';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { Inter } from 'next/font/google'
+ 
+// If loading a variable font, you don't need to specify the font weight
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const unbounded = Unbounded({
   subsets: ["latin"],
-});
+  weight: ["400", "500", "600", "700", "800", "900"],
+  display: "swap",
+})
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,11 +30,100 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const items = [
+    {
+      label: "About",
+      bgColor: "#0D0716",
+      textColor: "#fff",
+      links: [
+        { label: "About Me", ariaLabel: "About Me Section", href: "#about" },
+        { label: "Tech Stack", ariaLabel: "Tech Stack Section", href: "#techstack" }
+      ]
+    },
+    {
+      label: "Projects",
+      bgColor: "#170D27",
+      textColor: "#fff",
+      links: [
+        { label: "All Projects", ariaLabel: "View All Projects", href: "#projects" },
+        { label: "Featured", ariaLabel: "Featured Projects", href: "#projects" }
+      ]
+    },
+    {
+      label: "Contact",
+      bgColor: "#271E37",
+      textColor: "#fff",
+      links: [
+        { label: "Get In Touch", ariaLabel: "Contact Section", href: "#contact" },
+        { label: "Social Links", ariaLabel: "Social Media", href: "#contact" }
+      ]
+    }
+  ];
   return (
-    <html lang="en">
+    <html lang="en" className={unbounded.className}>
+
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <header>
+          <CardNav
+            logo="/llavan_logo.png"
+            logoAlt="Company Logo"
+            items={items}
+            theme="dark"
+            baseColor="#131010"
+            menuColor="#000"
+            buttonBgColor="#ffffff"
+            buttonTextColor="#000000"
+            ease="power3.out"
+            className="fixed "
+          />
+        </header>
+        <div style={{
+          width: '100%', height: '600px', position: 'absolute',  // Scrolls with content
+          top: 0,
+          left: 0,
+          minHeight: '100vh',
+          zIndex: -1,
+          backgroundColor: 'black'
+        }}>
+          <Threads
+            amplitude={1}
+            distance={0}
+            enableMouseInteraction={false }
+          />
+        </div>
+        
+        {/* Social Media Icons - Bottom Right */}
+        <div className="fixed bottom-8 right-8 flex flex-col gap-4 z-50">
+          <a 
+            href="https://github.com/yourusername" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group relative p-3 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-lg hover:border-zinc-600 hover:bg-zinc-800/80 transition-all duration-300 hover:scale-110"
+            aria-label="GitHub Profile"
+          >
+            <SiGithub className="text-2xl text-zinc-400 group-hover:text-white transition-colors duration-300" />
+          </a>
+          
+          <a 
+            href="https://linkedin.com/in/yourusername" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group relative p-3 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-lg hover:border-zinc-600 hover:bg-zinc-800/80 transition-all duration-300 hover:scale-110"
+            aria-label="LinkedIn Profile"
+          >
+            <SiLinkerd className="text-2xl text-zinc-400 group-hover:text-white transition-colors duration-300" />
+          </a>
+          
+          <a 
+            href="mailto:your.email@gmail.com"
+            className="group relative p-3 bg-zinc-900/80 backdrop-blur-sm border border-zinc-800 rounded-lg hover:border-zinc-600 hover:bg-zinc-800/80 transition-all duration-300 hover:scale-110"
+            aria-label="Email"
+          >
+            <SiGmail className="text-2xl text-zinc-400 group-hover:text-white transition-colors duration-300" />
+          </a>
+        </div>
+        
         {children}
       </body>
     </html>
