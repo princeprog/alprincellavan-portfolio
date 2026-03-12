@@ -48,6 +48,10 @@ const BlurText: React.FC<BlurTextProps> = ({
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLParagraphElement>(null);
 
+  const prefersReducedMotion = typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   useEffect(() => {
     if (!ref.current) return;
     const observer = new IntersectionObserver(
@@ -103,9 +107,9 @@ const BlurText: React.FC<BlurTextProps> = ({
         return (
           <motion.span
             key={index}
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
-            transition={spanTransition}
+            initial={prefersReducedMotion ? { filter: 'blur(0px)', opacity: 1, y: 0 } : fromSnapshot}
+            animate={prefersReducedMotion ? { filter: 'blur(0px)', opacity: 1, y: 0 } : (inView ? animateKeyframes : fromSnapshot)}
+            transition={prefersReducedMotion ? { duration: 0 } : spanTransition}
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
             style={{
               display: 'inline-block',

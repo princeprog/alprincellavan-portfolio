@@ -56,6 +56,10 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const prefersReducedMotion = typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     const init = async () => {
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
@@ -190,7 +194,11 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
           tightHeight + 2 * (fuzzRange + 10)
         );
 
-        if (isClicking) {
+        // If user prefers reduced motion, use zero intensity (no fuzzy effect)
+        if (prefersReducedMotion) {
+          targetIntensity = 0;
+          currentIntensity = 0;
+        } else if (isClicking) {
           targetIntensity = 1;
         } else if (isGlitching) {
           targetIntensity = 1;

@@ -55,6 +55,10 @@ const TextType = ({
 
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
+  const prefersReducedMotion = typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const getRandomSpeed = useCallback(() => {
     if (!variableSpeed) return typingSpeed;
     const { min, max } = variableSpeed;
@@ -99,6 +103,15 @@ const TextType = ({
 
   useEffect(() => {
     if (!isVisible) return;
+
+    // If user prefers reduced motion, show full text immediately
+    if (prefersReducedMotion) {
+      const currentText = textArray[currentTextIndex];
+      const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
+      setDisplayedText(processedText);
+      setCurrentCharIndex(processedText.length);
+      return;
+    }
 
     let timeout: ReturnType<typeof setTimeout>;
 

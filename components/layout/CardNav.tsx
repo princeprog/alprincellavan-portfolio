@@ -2,7 +2,6 @@
 
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import { useRouter } from 'next/navigation';
 // use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
 import GradientText from '@/components/ui/GradientText';
@@ -178,6 +177,13 @@ const CardNav: React.FC<CardNavProps> = ({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
+  };
+
   const closeMenu = () => {
     const tl = tlRef.current;
     if (!tl || !isExpanded) return;
@@ -219,8 +225,10 @@ const CardNav: React.FC<CardNavProps> = ({
           <div
             className={`hamburger-menu ${isHamburgerOpen ? 'open' : ''} group h-full flex flex-col items-center justify-center cursor-pointer gap-[6px] order-2 md:order-none`}
             onClick={toggleMenu}
+            onKeyDown={handleKeyDown}
             role="button"
             aria-label={isExpanded ? 'Close menu' : 'Open menu'}
+            aria-expanded={isExpanded}
             tabIndex={0}
             style={{ color: "white" }}
           >

@@ -26,8 +26,8 @@ export default function Projects() {
             <div className="max-w-6xl mx-auto">
                 {/* Header */}
                 <div className="mb-16">
-                    <h2 className="text-5xl font-bold text-white mb-4">Projects</h2>
-                    <p className="text-gray-500 text-lg">A selection of my recent work</p>
+                    <h2 className="text-[clamp(2rem,5vw,3rem)] font-bold text-white mb-4">Projects</h2>
+                    <p className="text-gray-400 text-lg">A selection of my recent work</p>
                 </div>
 
                 {/* Category Filter */}
@@ -36,15 +36,26 @@ export default function Projects() {
                         <button
                             key={category.id}
                             onClick={() => setSelectedCategory(category.id)}
-                            className={`pb-3 px-1 text-sm font-medium transition-colors whitespace-nowrap ${
+                            aria-current={selectedCategory === category.id ? 'page' : undefined}
+                            className={`pb-3 px-4 min-h-[44px] text-sm font-medium transition-colors whitespace-nowrap ${
                                 selectedCategory === category.id
                                     ? 'text-white border-b-2 border-white'
-                                    : 'text-gray-500 hover:text-gray-300'
+                                    : 'text-gray-400 hover:text-gray-300'
                             }`}
                         >
                             {category.label}
                         </button>
                     ))}
+                </div>
+
+                {/* Screen reader announcement for filter results */}
+                <div 
+                    role="status" 
+                    aria-live="polite" 
+                    aria-atomic="true"
+                    className="sr-only"
+                >
+                    {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'} found
                 </div>
 
                 {/* Projects Grid */}
@@ -66,7 +77,7 @@ export default function Projects() {
                 {/* Empty state */}
                 {filteredProjects.length === 0 && (
                     <div className="text-center py-20">
-                        <p className="text-gray-600">No projects found</p>
+                        <p className="text-gray-500">No projects found</p>
                     </div>
                 )}
             </div>

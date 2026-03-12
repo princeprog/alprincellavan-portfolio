@@ -7,7 +7,7 @@ import Home from "@/pages/Home"
 
 export default function HomePage() {
     return (
-        <div>
+        <div id="main-content">
             <Home/>
             <TechStack/>
             <AboutMe/>

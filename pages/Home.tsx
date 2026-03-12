@@ -12,7 +12,7 @@ export default function Home() {
                     delay={200}
                     animateBy="words"
                     direction="top"
-                    className="text-8xl mb-8 text-white"
+                    className="text-[clamp(2.5rem,8vw,6rem)] mb-8 text-white"
                 />
                 <TrueFocus
                     sentence="Full-Stack Web Developer"

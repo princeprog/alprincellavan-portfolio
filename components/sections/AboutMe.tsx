@@ -7,7 +7,7 @@ export default function AboutMe() {
         <div id="about" className="flex flex-col items-center justify-center min-h-screen py-2 bg-black">
             <SplitText
                 text="About Me"
-                className="text-6xl font-semibold text-center text-white"
+                className="text-[clamp(2rem,6vw,3.75rem)] font-semibold text-center text-white"
                 delay={50}
                 duration={1.25}
                 ease="power3.out"

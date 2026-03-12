@@ -70,6 +70,13 @@ const FallingText: React.FC<FallingTextProps> = ({
   useEffect(() => {
     if (!effectStarted) return;
 
+    const prefersReducedMotion = typeof window !== 'undefined' &&
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // If user prefers reduced motion, skip the physics simulation
+    if (prefersReducedMotion) return;
+
     const { Engine, Render, World, Bodies, Runner, Mouse, MouseConstraint } = Matter;
 
     if (!containerRef.current || !canvasContainerRef.current) return;
