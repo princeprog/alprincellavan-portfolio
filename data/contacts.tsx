@@ -37,8 +37,8 @@ export const socialLinks: SocialLink[] = [
     {
         name: 'Twitter',
         icon: <FaTwitter />,
-        href: 'https://twitter.com/yourusername',
-        label: '@yourusername',
+        href: 'https://twitter.com/alprincedev',
+        label: '@alprincedev',
         ariaLabel: 'Twitter Profile'
     },
 ];

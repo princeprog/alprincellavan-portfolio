@@ -1,0 +1,22 @@
+<svg width="1600" height="1000" viewBox="0 0 1600 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1000" fill="#E4E7EC"/>
+  <rect x="72" y="58" width="1456" height="884" rx="34" fill="#FFFFFF" stroke="#D0D5DD" stroke-width="3"/>
+  <rect x="112" y="96" width="1376" height="58" rx="14" fill="#F2F4F7"/>
+  <circle cx="146" cy="125" r="8" fill="#98A2B3"/>
+  <circle cx="172" cy="125" r="8" fill="#98A2B3"/>
+  <circle cx="198" cy="125" r="8" fill="#98A2B3"/>
+  <text x="1328" y="132" fill="#667085" font-family="Arial, sans-serif" font-size="20" text-anchor="end">quantumtask.app</text>
+  <text x="136" y="232" fill="#101828" font-family="Arial, sans-serif" font-size="58" font-weight="700">QuantumTask Workspace</text>
+  <text x="136" y="278" fill="#667085" font-family="Arial, sans-serif" font-size="24">AI scheduling, smart priorities, and live team planning.</text>
+  <rect x="136" y="324" width="760" height="486" rx="26" fill="#0F172A"/>
+  <path d="M176 735C252 670 324 661 398 698C472 735 548 730 624 675C700 620 773 617 854 654" stroke="#A3E635" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="398" cy="698" r="13" fill="#A3E635"/>
+  <circle cx="624" cy="675" r="13" fill="#A3E635"/>
+  <circle cx="854" cy="654" r="13" fill="#A3E635"/>
+  <rect x="948" y="324" width="500" height="140" rx="20" fill="#F2F4F7"/>
+  <rect x="948" y="486" width="500" height="140" rx="20" fill="#F2F4F7"/>
+  <rect x="948" y="648" width="500" height="162" rx="20" fill="#F2F4F7"/>
+  <text x="980" y="402" fill="#101828" font-family="Arial, sans-serif" font-size="30" font-weight="700">Deadline Prediction: 94%</text>
+  <text x="980" y="564" fill="#101828" font-family="Arial, sans-serif" font-size="30" font-weight="700">Focus Score: +28%</text>
+  <text x="980" y="736" fill="#101828" font-family="Arial, sans-serif" font-size="30" font-weight="700">Suggested Sprint Plan</text>
+</svg>

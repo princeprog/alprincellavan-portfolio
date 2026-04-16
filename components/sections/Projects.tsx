@@ -1,160 +1,115 @@
 'use client';
 
-import { useState } from 'react';
+import Image from 'next/image';
 import { projects } from '@/data/projects';
 import { Project } from '@/types/index';
-import { motion, AnimatePresence } from 'motion/react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { motion } from 'motion/react';
+import { ArrowUpRight } from 'lucide-react';
+
+const categoryLabels: Record<Project['category'], string> = {
+    web: 'WEB DESIGN',
+    mobile: 'MOBILE APP',
+    ai: 'AI PRODUCT',
+    tool: 'DEV TOOL'
+};
 
 export default function Projects() {
-    const [selectedCategory, setSelectedCategory] = useState<string>('all');
-
-    const categories = [
-        { id: 'all', label: 'All' },
-        { id: 'web', label: 'Web' },
-        { id: 'mobile', label: 'Mobile' },
-        { id: 'ai', label: 'AI/ML' },
-        { id: 'tool', label: 'Tools' },
-    ];
-
-    const filteredProjects = selectedCategory === 'all' 
-        ? projects 
-        : projects.filter(p => p.category === selectedCategory);
-
     return (
-        <div id="projects" className="min-h-screen py-20 px-4 bg-black">
-            <div className="max-w-6xl mx-auto">
-                {/* Header */}
-                <div className="mb-16">
-                    <h2 className="text-[clamp(2rem,5vw,3rem)] font-bold text-white mb-4">Projects</h2>
-                    <p className="text-gray-400 text-lg">A selection of my recent work</p>
-                </div>
+        <section id="projects" className="relative overflow-hidden bg-black px-4 py-18 sm:py-22 lg:py-24">
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_14%,rgba(255,255,255,0.06),transparent_44%),radial-gradient(circle_at_84%_82%,rgba(255,255,255,0.035),transparent_42%)]" />
+            <div className="pointer-events-none absolute inset-0 opacity-20 [background-image:radial-gradient(rgba(255,255,255,0.28)_1px,transparent_1px)] [background-size:4px_4px] [mask-image:linear-gradient(to_bottom,transparent,black_18%,black_85%,transparent)]" />
 
-                {/* Category Filter */}
-                <div className="flex gap-3 mb-12 border-b border-gray-800 overflow-x-auto">
-                    {categories.map((category) => (
-                        <button
-                            key={category.id}
-                            onClick={() => setSelectedCategory(category.id)}
-                            aria-current={selectedCategory === category.id ? 'page' : undefined}
-                            className={`pb-3 px-4 min-h-[44px] text-sm font-medium transition-colors whitespace-nowrap ${
-                                selectedCategory === category.id
-                                    ? 'text-white border-b-2 border-white'
-                                    : 'text-gray-400 hover:text-gray-300'
-                            }`}
-                        >
-                            {category.label}
-                        </button>
+            <div className="relative mx-auto max-w-[1260px]">
+                <h2 className="sr-only">Projects</h2>
+
+                <div className="space-y-20 lg:space-y-24">
+                    {projects.map((project, index) => (
+                        <ProjectShowcase
+                            key={project.id}
+                            project={project}
+                            index={index}
+                        />
                     ))}
                 </div>
-
-                {/* Screen reader announcement for filter results */}
-                <div 
-                    role="status" 
-                    aria-live="polite" 
-                    aria-atomic="true"
-                    className="sr-only"
-                >
-                    {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'} found
-                </div>
-
-                {/* Projects Grid */}
-                <motion.div 
-                    layout
-                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                >
-                    <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project, index) => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                                index={index}
-                            />
-                        ))}
-                    </AnimatePresence>
-                </motion.div>
-
-                {/* Empty state */}
-                {filteredProjects.length === 0 && (
-                    <div className="text-center py-20">
-                        <p className="text-gray-500">No projects found</p>
-                    </div>
-                )}
             </div>
-        </div>
+        </section>
     );
 }
 
-interface ProjectCardProps {
+interface ProjectShowcaseProps {
     project: Project;
     index: number;
 }
 
-function ProjectCard({ project, index }: ProjectCardProps) {
+function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
+    const reverse = index % 2 === 1;
+    const primaryLink = project.demoUrl ?? project.githubUrl;
+
     return (
-        <motion.div
-            layout
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ 
-                duration: 0.3, 
-                delay: index * 0.05,
-            }}
-            className="group bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-colors duration-300 p-6"
+        <motion.article
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
         >
-            {/* Title */}
-            <div className="flex items-start justify-between mb-3">
-                <h3 className="text-xl font-semibold text-white group-hover:text-gray-300 transition-colors">
-                    {project.title}
-                </h3>
-                {project.featured && (
-                    <span className="text-xs text-gray-600 font-mono">Featured</span>
-                )}
-            </div>
-            
-            {/* Description */}
-            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-                {project.description}
-            </p>
+            <div className={reverse ? 'order-1 lg:order-2' : 'order-1 lg:order-1'}>
+                <div className="group relative overflow-hidden rounded-md border border-zinc-400/60 bg-zinc-300/88 p-2 shadow-[0_24px_70px_rgba(0,0,0,0.52)]">
+                    <div className="overflow-hidden rounded-[3px] border border-zinc-300 bg-zinc-100/95">
+                        <div className="flex items-center gap-2 border-b border-zinc-300 bg-zinc-200/95 px-4 py-2.5">
+                            <span className="h-2.5 w-2.5 rounded-full bg-zinc-500" />
+                            <span className="h-2.5 w-2.5 rounded-full bg-zinc-500" />
+                            <span className="h-2.5 w-2.5 rounded-full bg-zinc-500" />
+                            <span className="ml-auto text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-600">
+                                {project.id}
+                            </span>
+                        </div>
 
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 mb-6">
-                {project.tags.map((tag) => (
-                    <span
-                        key={tag}
-                        className="text-xs text-gray-500 font-mono"
-                    >
-                        {tag}
+                        <div className="relative aspect-[16/10] overflow-hidden">
+                            <Image
+                                src={project.image ?? '/profile.jpg'}
+                                alt={`${project.title} project mockup`}
+                                fill
+                                className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                                sizes="(max-width: 1024px) 100vw, 48vw"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className={reverse ? 'order-2 lg:order-1' : 'order-2 lg:order-2'}>
+                <div className="max-w-[560px]">
+                    <span className="inline-flex rounded-full border border-zinc-200 bg-zinc-100 px-7 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] text-zinc-900 shadow-[0_10px_28px_rgba(0,0,0,0.28)]">
+                        {categoryLabels[project.category]}
                     </span>
-                ))}
+
+                    <h3 className="mt-8 text-[clamp(2.2rem,4.2vw,4rem)] font-semibold leading-[1.1] tracking-tight text-white">
+                        {project.title}
+                    </h3>
+
+                    <p className="mt-4 max-w-xl text-xl leading-9 text-zinc-300">
+                        {project.description}
+                    </p>
+
+                    {primaryLink ? (
+                        <div className="mt-10 inline-flex flex-col items-start">
+                            <a
+                                href={primaryLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-3 text-[2rem] leading-none font-medium text-zinc-200 transition hover:text-white"
+                            >
+                                <span>See Details</span>
+                                <ArrowUpRight className="size-8" aria-hidden="true" />
+                            </a>
+
+                            <span className="mt-4 h-px w-44 bg-zinc-500/65" />
+                        </div>
+                    ) : null}
+                </div>
             </div>
 
-            {/* Links */}
-            <div className="flex gap-4 text-sm">
-                {project.githubUrl && (
-                    <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                    >
-                        <FaGithub className="text-base" />
-                        <span>Code</span>
-                    </a>
-                )}
-                {project.demoUrl && (
-                    <a
-                        href={project.demoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
-                    >
-                        <FaExternalLinkAlt className="text-sm" />
-                        <span>Live Demo</span>
-                    </a>
-                )}
-            </div>
-        </motion.div>
+        </motion.article>
     );
 }

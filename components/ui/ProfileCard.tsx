@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useRef, useCallback, useMemo, useState } from 'react';
 
@@ -463,7 +463,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
         <section
           className="grid relative overflow-hidden"
           style={{
-            height: '40svh',
+            height: '80svh',
             maxHeight: '540px',
             aspectRatio: '0.718',
             borderRadius: cardRadius,
