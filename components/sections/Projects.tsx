@@ -47,69 +47,86 @@ function ProjectShowcase({ project, index }: ProjectShowcaseProps) {
 
     return (
         <motion.article
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.25 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20"
         >
             <div className={reverse ? 'order-1 lg:order-2' : 'order-1 lg:order-1'}>
-                <div className="group relative overflow-hidden rounded-md border border-zinc-400/60 bg-zinc-300/88 p-2 shadow-[0_24px_70px_rgba(0,0,0,0.52)]">
-                    <div className="overflow-hidden rounded-[3px] border border-zinc-300 bg-zinc-100/95">
-                        <div className="flex items-center gap-2 border-b border-zinc-300 bg-zinc-200/95 px-4 py-2.5">
-                            <span className="h-2.5 w-2.5 rounded-full bg-zinc-500" />
-                            <span className="h-2.5 w-2.5 rounded-full bg-zinc-500" />
-                            <span className="h-2.5 w-2.5 rounded-full bg-zinc-500" />
-                            <span className="ml-auto text-[10px] font-semibold uppercase tracking-[0.12em] text-zinc-600">
-                                {project.id}
+                <div className="group relative overflow-hidden rounded-xl border border-white/10 bg-zinc-900/50 p-1.5 shadow-[0_32px_80px_-20px_rgba(0,0,0,0.8)] transition-all duration-500 hover:border-white/20 hover:shadow-[0_45px_100px_-25px_rgba(0,0,0,0.9)]">
+                    <div className="overflow-hidden rounded-lg border border-white/5 bg-black">
+                        <div className="flex items-center gap-2 border-b border-white/5 bg-zinc-900/80 px-4 py-3">
+                            <div className="flex gap-1.5">
+                                <span className="h-2.5 w-2.5 rounded-full bg-red-500/80" />
+                                <span className="h-2.5 w-2.5 rounded-full bg-amber-500/80" />
+                                <span className="h-2.5 w-2.5 rounded-full bg-emerald-500/80" />
+                            </div>
+                            <span className="ml-4 text-[11px] font-medium tracking-[0.2em] text-zinc-500">
+                                HTTPS://{project.id.toUpperCase()}.COM
                             </span>
                         </div>
 
-                        <div className="relative aspect-[16/10] overflow-hidden">
+                        <div className="relative min-h-[300px] w-full bg-zinc-950 sm:min-h-[400px]">
                             <Image
                                 src={project.image ?? '/profile.jpg'}
-                                alt={`${project.title} project mockup`}
-                                fill
-                                className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                                sizes="(max-width: 1024px) 100vw, 48vw"
+                                alt={`${project.title} project showcase`}
+                                width={1600}
+                                height={1000}
+                                className="h-auto w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.01]"
+                                priority={index === 0}
                             />
                         </div>
                     </div>
+
+                    {/* Decorative glow */}
+                    <div className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" 
+                         style={{ background: 'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255,255,255,0.06), transparent 40%)' }} />
                 </div>
             </div>
 
             <div className={reverse ? 'order-2 lg:order-1' : 'order-2 lg:order-2'}>
-                <div className="max-w-[560px]">
-                    <span className="inline-flex rounded-full border border-zinc-200 bg-zinc-100 px-7 py-2.5 text-sm font-semibold uppercase tracking-[0.08em] text-zinc-900 shadow-[0_10px_28px_rgba(0,0,0,0.28)]">
-                        {categoryLabels[project.category]}
-                    </span>
+                <div className={reverse ? 'lg:pr-12' : 'lg:pl-12'}>
+                    <div className="flex items-center gap-4">
+                        <span className="text-zinc-500/80">
+                            {project.icon}
+                        </span>
+                        <span className="text-sm font-bold tracking-[0.2em] text-zinc-500 uppercase">
+                            {categoryLabels[project.category]}
+                        </span>
+                    </div>
 
-                    <h3 className="mt-8 text-[clamp(2.2rem,4.2vw,4rem)] font-semibold leading-[1.1] tracking-tight text-white">
+                    <h3 className="mt-6 text-[clamp(2.5rem,5vw,4.5rem)] font-bold leading-[1.05] tracking-tight text-white">
                         {project.title}
                     </h3>
 
-                    <p className="mt-4 max-w-xl text-xl leading-9 text-zinc-300">
+                    <p className="mt-8 text-lg leading-relaxed text-zinc-400 sm:text-xl lg:max-w-[480px]">
                         {project.description}
                     </p>
 
+                    <div className="mt-8 flex flex-wrap gap-2">
+                        {project.tags.map(tag => (
+                            <span key={tag} className="rounded-full border border-white/5 bg-white/5 px-3 py-1 text-xs font-medium text-zinc-400">
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+
                     {primaryLink ? (
-                        <div className="mt-10 inline-flex flex-col items-start">
+                        <div className="mt-12">
                             <a
                                 href={primaryLink}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-3 text-[2rem] leading-none font-medium text-zinc-200 transition hover:text-white"
+                                className="group/link inline-flex items-center gap-4 border-b-2 border-white/10 pb-2 transition-all duration-300 hover:border-white hover:gap-6"
                             >
-                                <span>See Details</span>
-                                <ArrowUpRight className="size-8" aria-hidden="true" />
+                                <span className="text-2xl font-semibold text-zinc-200">Explore Project</span>
+                                <ArrowUpRight className="size-8 text-zinc-500 transition-colors group-hover/link:text-white" />
                             </a>
-
-                            <span className="mt-4 h-px w-44 bg-zinc-500/65" />
                         </div>
                     ) : null}
                 </div>
             </div>
-
         </motion.article>
     );
 }

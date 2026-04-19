@@ -1,81 +1,57 @@
 import { Project } from '@/types/index';
-import { SiReact, SiNextdotjs, SiPython, SiNodedotjs, SiTensorflow, SiDocker } from 'react-icons/si';
-import { FaBrain, FaRocket, FaShoppingCart, FaMobileAlt, FaCloud, FaChartLine } from 'react-icons/fa';
+import { SiReact, SiNextdotjs, SiPython, SiNodedotjs, SiTensorflow, SiDocker, SiPostgresql, SiTailwindcss, SiTypescript } from 'react-icons/si';
+import { FaBrain, FaRocket, FaShoppingCart, FaMobileAlt, FaCloud, FaChartLine, FaUmbrellaBeach, FaFilm, FaBoxOpen } from 'react-icons/fa';
 
 export const projects: Project[] = [
     {
-        id: 'quantum-task',
-        title: 'QuantumTask',
-        description: 'AI-powered task management system that predicts deadlines and optimizes workflow',
-        longDescription: 'A revolutionary task management platform that leverages machine learning to analyze work patterns, predict completion times, and automatically prioritize tasks. Features include smart scheduling, team collaboration, and real-time analytics dashboard.',
-        image: '/mockups/quantum-task.svg',
-        tags: ['React', 'Node.js', 'TensorFlow', 'MongoDB', 'WebSocket'],
-        icon: <FaBrain className="w-8 h-8" />,
-        demoUrl: 'https://quantumtask.demo',
-        githubUrl: 'https://github.com/demo/quantum-task',
-        featured: true,
-        category: 'ai'
-    },
-    {
-        id: 'nexus-commerce',
-        title: 'NexusCommerce',
-        description: 'Next-gen e-commerce platform with AR product visualization',
-        longDescription: 'A cutting-edge e-commerce solution that brings products to life using augmented reality. Customers can visualize products in their space before purchasing. Includes inventory management, payment processing, and advanced analytics.',
-        image: '/mockups/nexus-commerce.svg',
-        tags: ['Next.js', 'TypeScript', 'Three.js', 'Stripe', 'PostgreSQL'],
-        icon: <FaShoppingCart className="w-8 h-8" />,
-        demoUrl: 'https://nexuscommerce.demo',
-        githubUrl: 'https://github.com/demo/nexus-commerce',
+        id: 'startupsphere',
+        title: 'StartupSphere',
+        description: 'Elite global ecosystem for startup founders and visionary investors.',
+        longDescription: 'A high-fidelity networking platform designed for the modern startup ecosystem. Features include AI-driven founder-investor matching, interactive project pitching canvases, and comprehensive deal flow management tools. Built with a focus on speed, connectivity, and premium design aesthetics.',
+        image: '/startupsphere-project.jpg',
+        tags: ['Next.js', 'Typescript', 'Tailwind CSS', 'Framer Motion', 'PostgreSQL'],
+        icon: <FaRocket className="w-8 h-8" />,
+        demoUrl: '#',
+        githubUrl: '#',
         featured: true,
         category: 'web'
     },
     {
-        id: 'cloudstream',
-        title: 'CloudStream Analytics',
-        description: 'Real-time data streaming and visualization platform for IoT devices',
-        longDescription: 'Enterprise-grade streaming analytics platform that processes millions of events per second. Features include real-time dashboards, anomaly detection, predictive maintenance, and custom alerting systems.',
-        image: '/mockups/cloudstream.svg',
-        tags: ['React', 'Kafka', 'ElasticSearch', 'Docker', 'Kubernetes'],
-        icon: <FaCloud className="w-8 h-8" />,
-        demoUrl: 'https://cloudstream.demo',
+        id: 'ayahay-digital',
+        title: 'Ayahay (Hayahai)',
+        description: 'Elite travel management ecosystem for agents and fleet operators.',
+        longDescription: 'A comprehensive digital infrastructure designed to streamline travel bookings and financial operations. Features a high-fidelity admin dashboard, manual wallet deposit systems with automated verification, and a robust manifest management engine for island-wide transportation networks.',
+        image: '/hayahai-project.png',
+        tags: ['Next.js', 'NestJS', 'PostgreSQL', 'Prisma', 'Tailwind CSS'],
+        icon: <FaUmbrellaBeach className="w-8 h-8" />,
+        demoUrl: 'https://ayahay.com', // Placeholder if not provided
+        githubUrl: '#',
         featured: true,
-        category: 'tool'
+        category: 'web'
     },
     {
-        id: 'pulse-fitness',
-        title: 'PulseFit',
-        description: 'Mobile fitness app with AI personal trainer and nutrition tracking',
-        longDescription: 'Comprehensive fitness application featuring AI-powered workout recommendations, meal planning, progress tracking, and social features. Integrates with wearable devices for real-time health monitoring.',
-        image: '/mockups/pulse-fitness.svg',
-        tags: ['React Native', 'Python', 'FastAPI', 'TensorFlow', 'Redis'],
-        icon: <FaMobileAlt className="w-8 h-8" />,
-        demoUrl: 'https://pulsefit.demo',
-        githubUrl: 'https://github.com/demo/pulse-fitness',
-        featured: false,
-        category: 'mobile'
+        id: 'cinema-hub',
+        title: 'Cinema Hub',
+        description: 'Immersive cinematic exploration and real-time ticketing platform.',
+        longDescription: 'A high-fidelity movie discovery platform integrated with the TMDB API. Features include interactive seat selection, real-time showtime synchronization, and a premium editorial layout designed for cinematic immersion. Built with high-performance animations and reactive state management.',
+        image: '/cinema-project.png',
+        tags: ['React', 'Node.js', 'Framer Motion', 'Redux', 'TMDB API'],
+        icon: <FaFilm className="w-8 h-8" />,
+        demoUrl: '#',
+        githubUrl: '#',
+        featured: true,
+        category: 'web'
     },
     {
-        id: 'neural-insights',
-        title: 'NeuralInsights',
-        description: 'Business intelligence platform with predictive analytics',
-        longDescription: 'Advanced BI tool that transforms raw data into actionable insights using machine learning. Features automated reports, trend prediction, natural language queries, and interactive visualizations.',
-        image: '/mockups/neural-insights.svg',
-        tags: ['TypeScript', 'Python', 'Pandas', 'D3.js', 'PostgreSQL'],
-        icon: <FaChartLine className="w-8 h-8" />,
-        demoUrl: 'https://neuralinsights.demo',
-        featured: false,
-        category: 'ai'
-    },
-    {
-        id: 'velocity-deploy',
-        title: 'VelocityDeploy',
-        description: 'Automated CI/CD pipeline with zero-downtime deployment',
-        longDescription: 'Modern deployment platform that automates the entire software delivery process. Features include automated testing, blue-green deployments, rollback capabilities, and infrastructure monitoring.',
-        image: '/mockups/velocity-deploy.svg',
-        tags: ['Node.js', 'Docker', 'Kubernetes', 'Jenkins', 'Terraform'],
-        icon: <FaRocket className="w-8 h-8" />,
-        githubUrl: 'https://github.com/demo/velocity-deploy',
-        featured: false,
+        id: 'project-pach',
+        title: 'Project Pach',
+        description: 'Specialized community asset management and digital repository.',
+        longDescription: 'A specialized platform designed for community-driven asset tracking and resource sharing. Features a sleek, minimalist interface and robust data filtering capabilities, enabling users to manage and discover localized assets with precision and ease.',
+        image: '/pach-project.png',
+        tags: ['TypeScript', 'Next.js', 'PostgreSQL', 'Lucide Icons'],
+        icon: <FaBoxOpen className="w-8 h-8" />,
+        demoUrl: '#',
+        featured: true,
         category: 'tool'
     }
 ];
